@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=3 uid="uid://f17bkujp7lyh"]
+
+[ext_resource type="Script" uid="uid://ctg2ey40hptqj" path="res://scripts/score.gd" id="1_272bh"]
+[ext_resource type="Texture2D" uid="uid://cwgyq28wrl4c5" path="res://assets/images.steamusercontent.png" id="2_5vw27"]
+[ext_resource type="Script" uid="uid://d7evw8w712lu" path="res://scripts/paddles_left.gd" id="3_kek77"]
+[ext_resource type="Texture2D" uid="uid://b5tgm5psr33qb" path="res://assets/racket.png" id="4_4c57u"]
+[ext_resource type="Script" uid="uid://cs5as5wuai553" path="res://scripts/paddle_right.gd" id="5_efxa6"]
+[ext_resource type="Script" uid="uid://cpogvnuxtshns" path="res://scripts/ball.gd" id="6_dg77c"]
+[ext_resource type="Texture2D" uid="uid://c3m3llr372cu8" path="res://assets/ball.png" id="7_ycdy4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tawv"]
+size = Vector2(27.5, 95)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6dq"]
+size = Vector2(799.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jf6jx"]
+size = Vector2(15, 642)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nl4bd"]
+radius = 12.0416
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_272bh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(431, 296)
+scale = Vector2(1.44505, 1.81564)
+texture = ExtResource("2_5vw27")
+
+[node name="paddle1" type="StaticBody2D" parent="."]
+position = Vector2(10, 300)
+script = ExtResource("3_kek77")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paddle1"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_1tawv")
+
+[node name="Sprite2D" type="Sprite2D" parent="paddle1"]
+position = Vector2(56, -2)
+scale = Vector2(5.34375, 4.78125)
+texture = ExtResource("4_4c57u")
+
+[node name="paddle2" type="StaticBody2D" parent="."]
+position = Vector2(790, 300)
+script = ExtResource("5_efxa6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paddle2"]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_1tawv")
+
+[node name="Sprite2D" type="Sprite2D" parent="paddle2"]
+position = Vector2(56, 6.55651e-06)
+scale = Vector2(5.34375, 5.03125)
+texture = ExtResource("4_4c57u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(157, -11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(242.5, 0)
+shape = SubResource("RectangleShape2D_xg6dq")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(157, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(239, 623)
+shape = SubResource("RectangleShape2D_xg6dq")
+
+[node name="left_wall" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(-32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_wall"]
+position = Vector2(22.5, 303)
+shape = SubResource("RectangleShape2D_jf6jx")
+
+[node name="right_wall" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(-32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_wall"]
+position = Vector2(839, 300)
+shape = SubResource("RectangleShape2D_jf6jx")
+
+[node name="ball" type="CharacterBody2D" parent="."]
+position = Vector2(400, 300)
+script = ExtResource("6_dg77c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+position = Vector2(1, 2)
+shape = SubResource("CircleShape2D_nl4bd")
+
+[node name="Sprite2D" type="Sprite2D" parent="ball"]
+position = Vector2(-25, 2)
+scale = Vector2(3, 3)
+texture = ExtResource("7_ycdy4")
+
+[node name="LeftScoreLabel" type="Label" parent="."]
+offset_left = 257.0
+offset_top = 38.0
+offset_right = 313.0
+offset_bottom = 81.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 1
+
+[node name="RightScoreLabel" type="Label" parent="."]
+offset_left = 483.0
+offset_top = 38.0
+offset_right = 523.0
+offset_bottom = 87.0
+scale = Vector2(2, 2)
+text = "0
+"
+horizontal_alignment = 1
